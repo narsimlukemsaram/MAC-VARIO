@@ -1,13 +1,12 @@
-# MAC-VARIO — corrected reproducible implementation
+# MAC-VARIO: Robust Visual-Inertial Odometry with Learned Metrics-Aware Covariance Fusion for Autonomous Aerial Vehicles in GPS-Denied Environments
 
-This repository refactors the student's MAC-VIO code to match the revised book-chapter concept:
-
-- MAC-VO visual correspondences with metric 3-D covariance;
-- AirIMU corrected measurements and learned uncertainty;
-- IMU preintegration with 9x9 covariance;
-- true consecutive-frame visual residuals `C_k -> C_{k+1}`;
-- covariance-weighted visual + inertial two-frame optimisation;
-- **no EuRoC ground-truth pose, orientation, velocity or bias inside the estimator**;
+This repository contains MAC-VARIO code to match the concept below:
+- MAC-VO visual correspondences with metric 3-D covariance
+- AirIMU corrected measurements and learned uncertainty
+- IMU preintegration with 9x9 covariance
+- true consecutive-frame visual residuals `C_k -> C_{k+1}`
+- covariance-weighted visual + inertial two-frame optimisation
+- **no EuRoC ground-truth pose, orientation, velocity or bias inside the estimator**
 - ground truth is loaded only after estimation for ATE/RPE evaluation.
 
 ## Repository layout
@@ -40,7 +39,7 @@ MAC_VARIO/
 
 ## Important methodological corrections
 
-1. `GT velocity` is **not** used for initialisation. Initial velocity comes from the first two MAC-VO body poses.
+1. `GT velocity` is **not** used for initialization. Initial velocity comes from the first two MAC-VO body poses.
 2. `GT orientation` is **not** used for gravity projection. Gravity and biases are estimated from an initial IMU window, or supplied from calibration.
 3. Phase C does **not** use EuRoC ground-truth IMU biases.
 4. The visual factor intersects MAC-VO landmark IDs in consecutive frames and uses an actual two-frame point residual.
@@ -58,7 +57,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Keep the upstream repositories separately, for example:
+Keep the upstream repositories separate, for example:
 
 ```text
 C:\GitHub\MAC-VO-main
@@ -66,7 +65,7 @@ C:\GitHub\AirIMU-main
 C:\GitHub\MAC_VARIO
 ```
 
-Install MAC-VO and AirIMU dependencies according to their upstream READMEs. Copy their required pretrained weights into those upstream repositories; do not commit large checkpoints into this repository.
+Install MAC-VO and AirIMU dependencies according to their upstream READMEs. Copy the required pretrained weights into those upstream repositories, and do not commit large checkpoints to this repository.
 
 ## Configure EuRoC
 
@@ -89,7 +88,7 @@ python -m experiments.phase_c --config configs/euroc_mh02.yaml
 python -m experiments.phase_d --config configs/euroc_mh02.yaml
 ```
 
-Phase B/C/D share a MAC-VO cache so the visual front end is held constant.
+Phases B/C/D share a MAC-VO cache, so the visual front end stays constant.
 
 ## Phase definitions
 
@@ -104,11 +103,11 @@ python -m experiments.covariance_floor --config configs/euroc_mh02.yaml
 python -m experiments.visual_degradation --config configs/euroc_v201.yaml
 ```
 
-The degradation script creates gamma-degraded EuRoC image copies. Each degraded copy must have a unique MAC-VO cache and then be rerun through B/C/D.
+The degradation script creates gamma-degraded copies of EuRoC images. Each degraded copy must have a unique MAC-VO cache and then be rerun through B/C/D.
 
 ## Scientific-use note
 
-Do **not** copy the chapter's existing Table 10.1 values into this code. Rerun the corrected pipeline and update the paper from the newly generated `metrics.json` files. This repository intentionally contains no hard-coded target metrics.
+Rerun the corrected pipeline and update the paper from the newly generated `metrics.json` files. This repository intentionally contains no hard-coded target metrics.
 
 
 ## Windows note: SciPy/App Control
