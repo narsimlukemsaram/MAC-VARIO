@@ -1,0 +1,41 @@
+dataset:
+  sequence: V2_02_medium
+  mav0: C:/Datasets/EuRoC/V2_02_medium/mav0
+  skip_initial_seconds: 1.0
+
+macvo:
+  root: C:/GitHub/MAC-VO-main
+  config: Config/Experiment/MACVO/Paper_Reproduce.yaml
+  cache: results/cache/V2_02_medium_macvo.pkl
+
+airimu:
+  pickle: C:/GitHub/AirIMU-main/EuRoCWholeaug/net_output.pickle
+  covariance_floor:
+    acc: 1.0e-6
+    gyro: 1.0e-8
+  alignment_window: 3000
+
+imu:
+  gyro_noise_density: 1.6968e-4
+  accel_noise_density: 2.0e-3
+  initial_stationary_window_s: 1.0
+
+  preintegrated_covariance_floor:
+    rotation: 1.0e-4
+    velocity: 1.0e-2
+    position: 1.0e-3
+
+optimizer:
+  imu_weight: 1.0
+  huber_delta: 2.5
+  lm_lambda: 1.0e-4
+  max_iter: 8
+  max_features: 500
+  min_common_features: 20
+
+runtime:
+  device: cuda:0
+  max_frames: null
+
+output:
+  root: results

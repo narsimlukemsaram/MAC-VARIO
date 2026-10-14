@@ -1,0 +1,5 @@
+numpy>=1.26
+PyYAML>=6.0
+torch>=2.2
+pypose>=0.6
+opencv-python>=4.8

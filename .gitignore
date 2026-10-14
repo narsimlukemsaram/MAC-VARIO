@@ -1,0 +1,68 @@
+
+# ============================================
+# MAC-VARIO Research Repository
+# ============================================
+
+# 1. Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# 2. IDE and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 3. Datasets
+datasets/*
+!datasets/README.md
+!datasets/.gitkeep
+
+# 4. Model checkpoints and weights
+checkpoints/*
+!checkpoints/README.md
+!checkpoints/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.pickle
+
+# 5. Generated experimental results
+results/*
+!results/README.md
+!results/.gitkeep
+
+# 6. Experiment outputs
+experiments/**/outputs/
+experiments/**/results/
+experiments/**/logs/
+experiments/**/checkpoints/
+experiments/**/runs/
+
+# 7. Temporary files
+macvario_macvo_tmp/
+*.tmp
+*.log
+*.swp
+
+# 8. Sensitive files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*.json
+*secrets*.json
+
+# 9. Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# 10. Local build files
+build/
+dist/
